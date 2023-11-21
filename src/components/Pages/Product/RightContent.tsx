@@ -8,6 +8,7 @@ import new3 from "../../../assets/images/surge-protection-thumb-G4.jpg"
 import Detail from "./Detail";
 import ProductDetail from "../../../types/Product/Detail";
 import New from "../../blocks/News";
+import { useState } from "react"
 
 const RightContent = ({ product }: { product: Product }) => {
 
@@ -69,6 +70,16 @@ const RightContent = ({ product }: { product: Product }) => {
         }
     ];
 
+    const [showDetail, setShowDetail] = useState<number>(7);
+
+    const showAll = () => {
+        setShowDetail(999);
+    }
+
+    const hideLess = () => {
+        setShowDetail(7);
+    }
+
     return (
         <>
             <div className="basis-2/12 pl-[2rem]">
@@ -80,11 +91,17 @@ const RightContent = ({ product }: { product: Product }) => {
                                 <div className="text-gray-500">
                                     {
                                         product.details.map((detail: ProductDetail, index: number) => {
-                                            return <Detail detail={detail} key={index} />
+                                            return <Detail detail={detail} key={index} show={showDetail >= index + 1} />
                                         })
                                     }
                                 </div >
-                                <button className="w-full border rounded border-black py-2 hover:text-white hover:bg-slate-900">Xem chi tiết</button></>
+                                {
+                                    showDetail != 999 ?
+                                        <button className="w-full border rounded border-black py-2 hover:text-white hover:bg-slate-900" onClick={showAll}>Xem chi tiết</button>
+                                        : <button className="w-full border rounded border-black py-2 hover:text-white hover:bg-slate-900" onClick={hideLess}>Ẩn bớt</button>
+                                }
+
+                            </>
                             : null
                     }
                 </section>

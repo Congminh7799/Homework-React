@@ -86,6 +86,22 @@ const Product = () => {
             {
                 title: 'Bộ nhớ trong:',
                 description: '128GB'
+            },
+            {
+                title: 'SIM:',
+                description: '1 Nano SIM & 1 eSIMHỗ trợ 5G'
+            },
+            {
+                title: 'Pin, Sạc:',
+                description: '4422 mAh20 W'
+            },
+            {
+                title: 'Hãng:',
+                description: 'Xiaomi'
+            },
+            {
+                title: 'Hệ điều hành:',
+                description: 'Android 11'
             }
         ],
         related: [

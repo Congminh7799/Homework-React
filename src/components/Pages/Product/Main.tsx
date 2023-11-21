@@ -21,6 +21,8 @@ import Related from "../../../types/Product/Related";
 
 import { useState } from 'react'
 import TypeOptions from "../../../types/Product/TypeOptions";
+import Rating from "../../blocks/Rating";
+import Slider from "../../blocks/Slider";
 
 const Main = ({ product }: { product: Product }) => {
     const productPrice = product.discount ? product.price - ((product.price * product.discount) / 100) : product.price;
@@ -87,18 +89,18 @@ const Main = ({ product }: { product: Product }) => {
 
     const [activeOption, setActiveOption] = useState<string | null>(null);
 
-    const [addItemToCart, setAddItemToCart] = useState<string | null>(null);
+    const [cartItem, setCartItem] = useState<string | null>(null);
 
-    const [addItemToWishList, setAddItemToWishList] = useState<string | null>(null);
+    const [wishList, setWishList] = useState<string | null>(null);
 
     const addToWishList = (product: Product) => {
         console.log('Đã thêm sản phẩm ' + product.name + ' vào danh sách yêu thích!!!');
-        setAddItemToWishList(product.name);
+        setWishList(product.name);
     }
 
     const addTocart = (product: Product) => {
         console.log('Đã thêm sản phẩm ' + product.name + ' vào giỏ hàng!!!');
-        setAddItemToCart(product.name);
+        setCartItem(product.name);
     }
 
     const updateActiveOption = (title: string) => {
@@ -142,7 +144,7 @@ const Main = ({ product }: { product: Product }) => {
                         </section>
                         <section className="mt-6">
                             <Button label="Thêm Giỏ Hàng" onClick={() => addTocart(product)} icon={<BsFillCartPlusFill />} className="bg-orange-500 text-white py-3" />
-                            <Button label="Yêu Thích" onClick={() => addToWishList(product)} icon={<AiTwotoneHeart />} className="bg-zinc-900 text-white mt-0 sm:mt-2 py-3" />
+                            <Button label="Yêu Thích" onClick={() => addToWishList(product)} icon={<AiTwotoneHeart />} iconActive={wishList == product.name} className="bg-zinc-900 text-white mt-0 sm:mt-2 py-3" />
                         </section>
                     </div>
                 </section>
@@ -191,6 +193,14 @@ const Main = ({ product }: { product: Product }) => {
                     <Tags title="Angular" className="bg-green-100" />
                     <Tags title="Svelte" className="bg-green-100" />
                     <Tags title="Next" className="bg-red-100" />
+                </section>
+
+                <section className="mt-6 flex">
+                    <Rating rating={0} />
+                </section>
+
+                <section className="mt-6 flex">
+                    <Slider />
                 </section>
             </div>
         </>

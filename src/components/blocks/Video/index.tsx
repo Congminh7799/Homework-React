@@ -1,8 +1,15 @@
 import BlockVideo from "../../../types/BlockVideo";
 
 import { AiOutlineHeart } from 'react-icons/ai';
+import { useState } from "react"
 
 const Video = ({ video }: { video: BlockVideo }) => {
+
+    const [like, setLike] = useState(false);
+
+    const likeVideo = () => {
+        setLike(!like);
+    }
 
     return (
         <div className="inline-flex text-center items-center font-medium space-x-4 mb-2 w-full pr-4">
@@ -11,9 +18,11 @@ const Video = ({ video }: { video: BlockVideo }) => {
                 <p className="font-bold">{video.title}</p>
                 <p>{video.description}</p>
             </div>
-            <div>
-                <AiOutlineHeart />
-            </div>
+            <button onClick={likeVideo}>
+                <p className={like ? 'text-red-600' : ''}>
+                    <AiOutlineHeart />
+                </p>
+            </button>
         </div>
     )
 
