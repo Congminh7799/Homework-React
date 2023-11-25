@@ -1,7 +1,7 @@
-import { FaStar } from "react-icons/fa";
 import { useState } from "react";
+import Star from "./Star";
 
-const Rating = ({ rating = 0 }: { rating: number }) => {
+const Rating = ({ rating = 0, showStatistics = false, isCanChoose = true }: { rating?: number, showStatistics?: boolean, isCanChoose?: boolean }) => {
 
     const ratingList = [1, 2, 3, 4, 5];
 
@@ -10,21 +10,18 @@ const Rating = ({ rating = 0 }: { rating: number }) => {
     const updateRatingNumber = (number: number) => {
         setRatingNumber(ratingNumber == number ? 0 : number);
     }
-    
+
     return (
         <div className="flex pb-[10px]">
             {
                 ratingList.map(function (item: number, index: number) {
-                    return <Star onClick={() => updateRatingNumber(item)} isActived={ratingNumber >= item} key={index} />
+                    return <Star onClick={() => {isCanChoose ? updateRatingNumber(item) : {}}} isActived={ratingNumber >= item} key={index} />
                 })
             }
+            {
+                showStatistics ? <p className="text-gray-500 ml-2">{rating} out of 5</p> : null
+            }
         </div>
-    )
-}
-
-const Star = ({ isActived, onClick }: { isActived: boolean, onClick: () => void, }) => {
-    return (
-        <div onClick={() => onClick()} className={isActived ? 'text-amber-400' : 'text-gray-300'}><FaStar /></div>
     )
 }
 

@@ -12,7 +12,6 @@ import TypeAuthor from "../../../types/Author";
 import author1 from "../../../assets/images/category-img-1.jpg";
 import author2 from "../../../assets/images/category-img-2.jpg";
 import Video from "../../blocks/Video";
-import Author from "../../blocks/Author";
 import Tags from "../../blocks/Tags";
 import Option from "./Options";
 import ProductPolicy from "../../../types/Product/Policy";
@@ -23,6 +22,10 @@ import { useState } from 'react'
 import TypeOptions from "../../../types/Product/TypeOptions";
 import Rating from "../../blocks/Rating";
 import Slider from "../../blocks/Slider";
+import SubscribeNewsletter from "../../forms/SubscribeNewsletter";
+import RatingProduct from "../../forms/RatingProduct";
+import RatingStatistics from "../../blocks/RatingStatistics";
+import Star from "../../blocks/Rating/Star";
 
 const Main = ({ product }: { product: Product }) => {
     const productPrice = product.discount ? product.price - ((product.price * product.discount) / 100) : product.price;
@@ -93,6 +96,12 @@ const Main = ({ product }: { product: Product }) => {
 
     const [wishList, setWishList] = useState<string | null>(null);
 
+    const [showFormRating, setShowFormRating] = useState<boolean>(false);
+
+    const updateShowFormRating = () => {
+        setShowFormRating(true);
+    }
+
     const addToWishList = (product: Product) => {
         console.log('Đã thêm sản phẩm ' + product.name + ' vào danh sách yêu thích!!!');
         setWishList(product.name);
@@ -143,7 +152,7 @@ const Main = ({ product }: { product: Product }) => {
                             }
                         </section>
                         <section className="mt-6">
-                            <Button label="Thêm Giỏ Hàng" onClick={() => addTocart(product)} icon={<BsFillCartPlusFill />} className="bg-orange-500 text-white py-3" />
+                            <Button label="Thêm Giỏ Hàng" onClick={() => addTocart(product)} icon={<BsFillCartPlusFill />} iconActive={cartItem == product.name} className="bg-orange-500 text-white py-3" />
                             <Button label="Yêu Thích" onClick={() => addToWishList(product)} icon={<AiTwotoneHeart />} iconActive={wishList == product.name} className="bg-zinc-900 text-white mt-0 sm:mt-2 py-3" />
                         </section>
                     </div>
@@ -166,6 +175,32 @@ const Main = ({ product }: { product: Product }) => {
                     }
                 </section>
 
+                <section className="mt-6">
+                    {
+                        <>
+                            <div className="flex border rounded py-4">
+                                <div className="basis-2/12 flex items-center justify-center">
+                                    <div className="text-orange-500 text-center">
+                                        <p className="text-3xl font-bold">4.95/5</p>
+                                        <div className="flex justify-center"><Star isActived={true} /></div>
+                                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mt-4">1,745 đánh giá</p>
+                                    </div>
+                                </div>
+                                <div className="basis-6/12 px-4 border-e border-s">
+                                    <RatingStatistics />
+                                </div>
+                                <div className="basis-4/12 flex-wrap flex items-center justify-center">
+                                    <button onClick={updateShowFormRating}>Gửi đánh giá của bạn</button>
+                                </div>
+                            </div>
+                            
+                            {
+                                showFormRating ? <RatingProduct /> : null
+                            }
+                        </>
+                    }
+                </section>
+
                 <section className="mt-6 flex">
                     <div className="basis-3/6">
                         <div className="text-xl font-bold mb-4">Videos</div>
@@ -178,14 +213,7 @@ const Main = ({ product }: { product: Product }) => {
                         </div >
                     </div>
                     <div className="basis-1/3">
-                        <div className="text-xl font-bold mb-4">Author</div>
-                        <div>
-                            {
-                                authors.map((item: TypeAuthor, index: number) => {
-                                    return <Author author={item} key={index} />;
-                                })
-                            }
-                        </div >
+                        <SubscribeNewsletter />
                     </div>
                 </section>
 

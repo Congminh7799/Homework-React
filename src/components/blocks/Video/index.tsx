@@ -18,11 +18,11 @@ const Video = ({ video }: { video: BlockVideo }) => {
                 <p className="font-bold">{video.title}</p>
                 <p>{video.description}</p>
             </div>
-            <button onClick={likeVideo}>
+            <a onClick={likeVideo}>
                 <p className={like ? 'text-red-600' : ''}>
                     <AiOutlineHeart />
                 </p>
-            </button>
+            </a>
         </div>
     )
 
