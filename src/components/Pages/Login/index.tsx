@@ -25,9 +25,9 @@ const LoginForm = () => {
         },
     })
 
-    const onSubmit = (event) => {
+    const onSubmit = (values: FormLogin) => {
         
-        mutation.mutate(credentials)
+        mutation.mutate(values)
         // Lấy token xác thực từ query
         const token = mutation.data?.token;
 
