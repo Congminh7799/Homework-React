@@ -23,24 +23,32 @@ const LoginForm = () => {
         mutationFn: (data: FormLogin) => {
             return axios.post('/users/login', data)
         },
+        onMutate: (variables) => {
+          // A mutation is about to happen!
+      
+          // Optionally return a context containing data to use when for example rolling back
+          return { id: 1 }
+        },
+        onError: (error, variables, context) => {
+          // An error happened!
+          console.log(`rolling back optimistic update with id ${context?.id}`)
+        },
+        onSuccess: (data, variables, context) => {
+          // Boom baby!
+        },
+        onSettled: (data, error, variables, context) => {
+            setCredentials({ username: "", password: "" })
+        },
     })
 
     const onSubmit = (values: FormLogin) => {
         
-        mutation.mutate(values)
-        // Lấy token xác thực từ query
-        const token = mutation.data?.token;
-
-        // Lưu token xác thực vào localStorage
-        if (token) {
-            localStorage.setItem("authToken", token);
-            window.location.href = "/dashboard";
-        }
+        mutation.mutate(values);
     };
 
     return (
         <main className="h-screen w-full flex flex-col justify-center items-center bg-[#1A2238]">
-            <div className="border flex flex-col justify-center items-center p-20">
+            <div className="border flex flex-col justify-center items-center p-20 round-">
                 <h1 className="text-2xl font-extrabold text-white tracking-widest mb-2">Login</h1>
                 <Formik
                     initialValues={credentials}
