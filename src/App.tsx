@@ -5,6 +5,8 @@ import NoPage from './components/Pages/NoPage'
 import Product from './components/Pages/Product'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ProtectedRoute from './auth/ProtectedRoute'
+import Home from './components/Pages/Home'
 
 const queryClient = new QueryClient();
 function App() {
@@ -15,10 +17,15 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route path="*" element={<NoPage />} />
-              <Route path="/product" element={<Product />} />
+              <Route path="/product" element={
+                <ProtectedRoute>
+                  <Product />
+                </ProtectedRoute>}
+              />
+              <Route path="/home" index element={<Home />} />
             </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NoPage />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

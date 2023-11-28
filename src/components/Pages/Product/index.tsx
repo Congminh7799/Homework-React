@@ -1,7 +1,6 @@
 import Product from "../../../types/Product";
 import Breadcrumb from "../../global/Breadcrumb";
 import Item from "../../global/Breadcrumb/item";
-import Container from "../../shared/Container";
 
 import image1 from "../../../assets/images/samsung-galaxy-s21-5g-P4305.jpg";
 import image2 from "../../../assets/images/samsung-galaxy-s21-5g-P4305-2.jpg";
@@ -133,17 +132,15 @@ const Product = () => {
 
     return (
         <>
-            <Container>
-                <Breadcrumb>
-                    <Item label="Category" url="/category"></Item>
-                    <Item label="Product" url="/product" showIcon={false}></Item>
-                </Breadcrumb>
+            <Breadcrumb>
+                <Item label="Category" url="/category"></Item>
+                <Item label="Product" url="/product" showIcon={false}></Item>
+            </Breadcrumb>
 
-                <div className="flex flex-row mt-[3rem]">
-                    <Main product={product} />
-                    <RightContent product={product} />
-                </div>
-            </Container>
+            <div className="flex flex-row mt-[3rem]">
+                <Main product={product} />
+                <RightContent product={product} />
+            </div>
         </>
     )
 }

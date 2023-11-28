@@ -8,7 +8,7 @@ const Navigation = ({ navigation }: { navigation: Link[] }) => {
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Logo
           label='Minh Shop'
-          href="/"
+          href="/home"
         />
 
         <Nav

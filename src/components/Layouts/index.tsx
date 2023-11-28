@@ -1,6 +1,7 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import TypeLink from "../../types/Link";
 import Navigation from "../global/Navbar";
+import Container from "../shared/Container";
 
 const Layout = () => {
     const navigation: TypeLink[] = [
@@ -35,8 +36,9 @@ const Layout = () => {
             <header>
                 <Navigation navigation={navigation} />
             </header>
-            <main> <Outlet /></main>
-            <footer>Footer</footer>
+
+            <Container><Outlet /></Container>
+            <footer className="flex item-center justify-center p-10 bg-black text-white">Footer</footer>
         </>
     )
 };
